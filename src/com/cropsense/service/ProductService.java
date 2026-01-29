@@ -18,12 +18,15 @@ public class ProductService {
 
     public boolean purchaseProduct(String id, int qty) {
         for (Product p : products) {
-            if (p.getProductId().equals(id) && p.getQuantity() >= qty) {
-                p.setQuantity(p.getQuantity() - qty);
-                FileHandler.saveProducts(products);
-                return true;
+            if (p.getProductId().equals(id)) {
+                if (p.getQuantity() >= qty && qty > 0) {
+                    p.setQuantity(p.getQuantity() - qty);
+                    FileHandler.saveProducts(products);
+                    return true;
+                }
+                return false; // Not enough stock or invalid quantity
             }
         }
-        return false;
+        return false; // Product ID not found
     }
 }

@@ -8,7 +8,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        new LoginView().show(stage);   // Start with login only
+        new LoginView().show(stage);
     }
 
     public static void main(String[] args) {

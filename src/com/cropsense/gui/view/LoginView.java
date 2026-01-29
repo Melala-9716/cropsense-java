@@ -2,11 +2,28 @@ package com.cropsense.gui.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class LoginView {
+
+    public void show(Stage stage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/cropsense/gui/view/Login.fxml")
+            );
+            loader.setController(this); // Set this class as controller
+            Parent root = loader.load();
+
+            stage.setScene(new Scene(root));
+            stage.setTitle("CropSense - Login");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     private TextField usernameField;
@@ -16,7 +33,6 @@ public class LoginView {
 
     @FXML
     private void handleLogin() {
-
         if(usernameField.getText().equals("buyer")
                 && passwordField.getText().equals("123")) {
 
@@ -27,6 +43,7 @@ public class LoginView {
 
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(new Scene(loader.load()));
+                stage.setTitle("CropSense - Buyer Dashboard");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -37,8 +54,5 @@ public class LoginView {
             alert.setContentText("Invalid Username or Password");
             alert.show();
         }
-    }
-
-    public void show(Stage stage) {
     }
 }

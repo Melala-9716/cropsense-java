@@ -6,10 +6,9 @@
 <VBox spacing="12"
       alignment="CENTER"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.cropsense.gui.view.LoginController"
+      fx:controller="com.cropsense.gui.view.LoginView"
       prefWidth="350"
-      prefHeight="300" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://javafx.com/fxml ">
+      prefHeight="300">
 
     <Label text="CropSense Login"
            style="-fx-font-size:20px; -fx-font-weight:bold;"/>

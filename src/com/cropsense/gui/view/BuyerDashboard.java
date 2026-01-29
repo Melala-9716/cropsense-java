@@ -30,34 +30,69 @@ public class BuyerDashboard implements Initializable {
     @FXML
     private void handleBuy() {
         try {
-            boolean success = service.purchaseProduct(
-                    idField.getText(),
-                    Integer.parseInt(qtyField.getText())
-            );
+            String id = idField.getText().trim();
+            String qtyText = qtyField.getText().trim();
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            if (id.isEmpty() || qtyText.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Please enter both Product ID and Quantity");
+                return;
+            }
+
+            int qty = Integer.parseInt(qtyText);
+            if (qty <= 0) {
+                showAlert(Alert.AlertType.ERROR, "Quantity must be positive");
+                return;
+            }
+
+            boolean success = service.purchaseProduct(id, qty);
+
+            Alert alert = new Alert(
+                    success ? Alert.AlertType.INFORMATION : Alert.AlertType.WARNING
+            );
+            alert.setTitle("Purchase Result");
             alert.setContentText(
-                    success ? "Purchase Successful" : "Not enough stock"
+                    success ? "Purchase Successful!" : "Not enough stock or invalid Product ID"
             );
             alert.show();
 
             refresh();
+            clearFields();
+
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Please enter a valid number for quantity");
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Please enter valid inputs.");
-            alert.show();
+            showAlert(Alert.AlertType.ERROR, "An error occurred: " + e.getMessage());
         }
     }
 
     private void refresh() {
         area.clear();
+        area.appendText("=== Available Products ===\n");
+        area.appendText("ID  |  Name  |  Price  |  Stock\n");
+        area.appendText("--------------------------------\n");
+
         for (Product p : service.getAllProducts()) {
             area.appendText(
-                    p.getProductId() + " | " +
-                    p.getProductName() + " | Price: " +
-                    p.getPrice() + " | Stock: " +
-                    p.getQuantity() + "\n"
+                    String.format("%-6s | %-10s | $%-6.2f | %-4d\n",
+                            p.getProductId(),
+                            p.getProductName(),
+                            p.getPrice(),
+                            p.getQuantity()
+                    )
             );
         }
+    }
+
+    private void clearFields() {
+        idField.clear();
+        qtyField.clear();
+    }
+
+    private void showAlert(Alert.AlertType type, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle("CropSense");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.show();
     }
 }
