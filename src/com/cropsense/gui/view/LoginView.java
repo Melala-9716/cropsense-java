@@ -12,9 +12,9 @@ public class LoginView {
     public void show(Stage stage) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/cropsense/gui/view/Login.fxml")
+                    getClass().getResource("/com/cropsense/gui/fxml/Loginview.fxml")
             );
-            loader.setController(this); // Set this class as controller
+            /*loader.setController(this); // Set this class as controller*/
             Parent root = loader.load();
 
             stage.setScene(new Scene(root));
