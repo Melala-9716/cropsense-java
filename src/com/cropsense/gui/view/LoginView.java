@@ -37,7 +37,7 @@ public class LoginView {
 
             try {
                 FXMLLoader loader = new FXMLLoader(
-                        getClass().getResource("/com/cropsense/gui/view/BuyerDashboard.fxml")
+                        getClass().getResource("/com/cropsense/gui/fxml/Buyer.fxml")
                 );
 
                 Stage stage = (Stage) usernameField.getScene().getWindow();
