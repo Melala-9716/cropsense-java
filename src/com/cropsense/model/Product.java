@@ -1,4 +1,4 @@
-package com.cropsense.model;
+ package com.cropsense.model;
 
 public class Product {
     private String productId;
