@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.cropsense.gui.view.FarmerDashboard"
+      spacing="10"
+      alignment="CENTER"
+      prefWidth="600"
+      prefHeight="500">
+
+    <Label text="Farmer Dashboard"
+           style="-fx-font-size:20px; -fx-font-weight:bold;"/>
+
+    <TextField fx:id="productIdField" promptText="Product ID"/>
+    <TextField fx:id="productNameField" promptText="Product Name"/>
+    <TextField fx:id="priceField" promptText="Price"/>
+    <TextField fx:id="quantityField" promptText="Quantity"/>
+
+    <HBox spacing="10">
+        <Button text="Add" onAction="#handleAddProduct"/>
+        <Button text="Update" onAction="#handleUpdateProduct"/>
+        <Button text="Delete" onAction="#handleDeleteProduct"/>
+    </HBox>
+
+    <ListView fx:id="productListView"/>
+
+</VBox>
